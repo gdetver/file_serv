@@ -29,14 +29,14 @@ async def upload(request):
 async def download(request):
     filename_hash = request.rel_url.query['filename_hash']
     filename = base_dir + filename_hash[:2] + '/' + filename_hash
-
     try:
+        os.stat(filename)
         response = web.FileResponse(filename)
         ContentDisposition = 'Attachment;filename=' + filename_hash
         response.headers['Content-Disposition'] = ContentDisposition
         return response
 
-    except FileNotFoundError:
+    except OSError:
         response_obj = {'status': 'failed',
                         'error': 'file not found',
                         'filename_hash': filename_hash,
