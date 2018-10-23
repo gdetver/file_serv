@@ -32,8 +32,8 @@ async def download(request):
 
     try:
         response = web.FileResponse(filename)
-        Content-Disposition = 'Attachment;filename=' + filename_hash
-        response.headers['Content-Disposition'] = Content-Disposition
+        ContentDisposition = 'Attachment;filename=' + filename_hash
+        response.headers['Content-Disposition'] = ContentDisposition
         return response
 
     except FileNotFoundError:
